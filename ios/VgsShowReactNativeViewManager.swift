@@ -47,9 +47,12 @@ class VgsShowReactNativeView : UIView, VGSLabelDelegate {
     
     @objc var textColor: String = "" {
         didSet {
-            attributeLabel.textColor = hexStringToUIColor(hex: textColor)
+            let color = hexStringToUIColor(hex: textColor);
+            attributeLabel.textColor = color;
+            attributeLabel.placeholderStyle.color = color;
         }
     }
+
     
     @objc var placeholderColor: String = "" {
         didSet {
@@ -83,7 +86,24 @@ class VgsShowReactNativeView : UIView, VGSLabelDelegate {
     
     @objc var fontFamily: String = "" {
         didSet {
-            attributeLabel.font = UIFont.init(name: fontFamily, size: 20);
+            let font = UIFont.init(name: fontFamily, size: fontSize);
+            attributeLabel.font = font;
+            attributeLabel.placeholderStyle.font = font;
+        }
+    }
+    
+    @objc var fontSize: CGFloat = 16 {
+        didSet {
+            var font: UIFont?;
+            
+            if (fontFamily == "") {
+                font = UIFont.systemFont(ofSize: fontSize);
+            } else {
+                font = UIFont.init(name: fontFamily, size: fontSize);
+            }
+            
+            attributeLabel.font = font;
+            attributeLabel.placeholderStyle.font = font;
         }
     }
     
@@ -158,7 +178,7 @@ class VgsShowReactNativeView : UIView, VGSLabelDelegate {
             cString.remove(at: cString.startIndex)
         }
         
-        if (cString.hasPrefix("transparent")) {
+        if (cString.hasPrefix("TRANSPARENT")) {
             return UIColor.clear;
         }
         

@@ -7,7 +7,7 @@ export default function App() {
   const vgsShow = React.useRef<VgsShowAttribute>(null);
   const customerToken = 'TOKEN_HERE';
   const ENV = 'sandbox';
-  const VAULT_ID = 'VAULT_ID_HERE';
+  const VAULT_ID = 'tntazhyknp1';
 
   return (
     <View style={styles.container}>
@@ -25,6 +25,7 @@ export default function App() {
       </TouchableOpacity>
       <VgsShowAttribute
         ref={vgsShow}
+        textColor={'#00ff00'}
         initParams={{
           environment: ENV,
           vaultId: VAULT_ID,
@@ -32,6 +33,8 @@ export default function App() {
             Authorization: 'Bearer ' + customerToken,
           },
         }}
+        fontSize={12}
+        borderColor={'transparent'}
         contentPath="data.attributes.pan"
         placeholder="Value will appear here"
         style={styles.box}

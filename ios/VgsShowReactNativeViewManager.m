@@ -12,6 +12,7 @@ RCT_EXPORT_VIEW_PROPERTY(borderRadius, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(characterSpacing, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(placeholder, NSString)
 RCT_EXPORT_VIEW_PROPERTY(contentPath, NSString)
+RCT_EXPORT_VIEW_PROPERTY(fontSize, CGFloat)
 
 // Functionality
 RCT_EXPORT_VIEW_PROPERTY(initParams, NSDictionary)

@@ -2,6 +2,7 @@ package com.vgsshowreactnative
 
 import android.graphics.Typeface
 import android.os.Build
+import android.util.TypedValue
 import android.view.View
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
@@ -55,6 +56,7 @@ class VgsShowReactNativeViewManager : SimpleViewManager<View>() {
   @ReactProp(name = "textColor", customType = "Color")
   fun setTextColor(view: View, value: Int) {
     (view as VgsAttrInstance).vgsText.setTextColor(value);
+    view.vgsText.setHintTextColor(value);
   }
 
   @ReactProp(name = "placeholderColor", customType = "Color")
@@ -72,6 +74,11 @@ class VgsShowReactNativeViewManager : SimpleViewManager<View>() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       (view as VgsAttrInstance).vgsText.setLetterSpacing(value)
     };
+  }
+
+  @ReactProp(name = "fontSize")
+  fun setFontSize(view: View, value: Float) {
+    (view as VgsAttrInstance).vgsText.setTextSize(TypedValue.COMPLEX_UNIT_PX, value)
   }
 
   @ReactProp(name = "fontFamily")

@@ -20,6 +20,7 @@ export type VgsShowReactNativeProps = {
   placeholderColor?: TextStyle['color'];
   bgColor?: TextStyle['color'];
   borderColor?: TextStyle['color'];
+  fontSize?: TextStyle['fontSize'];
   fontFamily?: TextStyle['fontFamily'];
   characterSpacing?: number;
   borderRadius?: number;
