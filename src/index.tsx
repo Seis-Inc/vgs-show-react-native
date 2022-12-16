@@ -61,7 +61,6 @@ let reqId = 0;
 
 export class VgsShowAttribute extends React.Component<VgsShowReactNativeProps> {
   private _nativeRef: any;
-  props: unknown;
 
   async reveal(
     path: string,
@@ -122,7 +121,7 @@ export class VgsShowAttribute extends React.Component<VgsShowReactNativeProps> {
     return (
       <VgsShowAttributeNative
         {...this.props}
-        onReqDone={(event: { nativeEvent: { reqId: any; code: any; error: any; }; }) => {
+        onReqDone={(event) => {
           // This one is used only for Android, to get the result code and wrap it
           // with a unified promise interface
           const { reqId: resultReqId, code, error } = event.nativeEvent;
