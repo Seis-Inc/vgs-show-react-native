@@ -93,4 +93,8 @@ class VgsAttrInstance(context: ReactContext) : LinearLayout(context) {
 
     this.vgsShow.requestAsync(request.build());
   }
+
+  fun copyToClipboard() {
+    vgsText.copyToClipboard()
+  }
 }

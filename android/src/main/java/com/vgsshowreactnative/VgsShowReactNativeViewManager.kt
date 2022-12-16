@@ -40,6 +40,7 @@ class VgsShowReactNativeViewManager : SimpleViewManager<View>() {
         args.getString(2) as String,
         args.getMap(3) as ReadableMap
       )
+      "copyToClipboard" -> (view as VgsAttrInstance).copyToClipboard()
     }
   }
 

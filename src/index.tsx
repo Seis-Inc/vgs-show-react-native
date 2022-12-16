@@ -61,6 +61,7 @@ let reqId = 0;
 
 export class VgsShowAttribute extends React.Component<VgsShowReactNativeProps> {
   private _nativeRef: any;
+  props: unknown;
 
   async reveal(
     path: string,
@@ -100,11 +101,28 @@ export class VgsShowAttribute extends React.Component<VgsShowReactNativeProps> {
     return Promise.reject('No ref available for native comp!');
   }
 
+  copyToClipboard(): void {
+    const handle = findNodeHandle(this._nativeRef);
+    const copy = Platform.select({
+      ios: () => {
+        NativeModules.VgsShowReactNativeViewManager.copyToClipboard(handle);
+      },
+      android: () => {
+        UIManager.dispatchViewManagerCommand(
+          handle,
+          'copyToClipboard' as any,
+          []
+        );
+      },
+    });
+    copy?.();
+  }
+
   render() {
     return (
       <VgsShowAttributeNative
         {...this.props}
-        onReqDone={(event) => {
+        onReqDone={(event: { nativeEvent: { reqId: any; code: any; error: any; }; }) => {
           // This one is used only for Android, to get the result code and wrap it
           // with a unified promise interface
           const { reqId: resultReqId, code, error } = event.nativeEvent;
@@ -119,7 +137,7 @@ export class VgsShowAttribute extends React.Component<VgsShowReactNativeProps> {
             delete promiseMap[resultReqId];
           }
         }}
-        ref={(ref) => {
+        ref={(ref: any) => {
           this._nativeRef = ref;
         }}
       />
