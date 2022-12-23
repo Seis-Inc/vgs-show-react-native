@@ -24,7 +24,7 @@ export type VgsShowReactNativeProps = {
   fontFamily?: TextStyle['fontFamily'];
   characterSpacing?: number;
   borderRadius?: number;
-
+  addSpaces?:boolean;
   /**
    * Placeholder while value is not available. Only for iOS.
    */
@@ -35,6 +35,10 @@ export type VgsShowReactNativeProps = {
     vaultId: string;
     environment: 'live' | 'sandbox';
     customHeaders?: Record<string, any>;
+  };
+  format?: {
+    pattern: string;
+    template: string;
   };
 };
 

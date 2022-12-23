@@ -104,4 +104,19 @@ class VgsShowReactNativeViewManager : SimpleViewManager<View>() {
       }
     }
   }
+
+  @ReactProp(name = "format")
+  fun setFormat(view: View, format: ReadableMap) {
+    if (format.hasKey("pattern") && format.hasKey("template")) {
+      val pattern = format.getString("pattern");
+      val template = format.getString("template");
+
+      pattern?.let {
+        val pat = it;
+        template?.let {
+          (view as VgsAttrInstance).vgsText.addTransformationRegex(pat.toRegex(), it);
+        }
+      }
+    }
+  }
 }
