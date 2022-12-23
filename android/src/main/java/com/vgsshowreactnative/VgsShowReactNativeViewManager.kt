@@ -44,6 +44,11 @@ class VgsShowReactNativeViewManager : SimpleViewManager<View>() {
     }
   }
 
+  @ReactProp(name = "allowFontScaling")
+  fun setAllowFontScaling(view: View, allowFontScaling: Boolean) {
+    (view as VgsAttrInstance).vgsText.setAllowFontScaling(allowFontScaling);
+  }
+
   @ReactProp(name = "contentPath")
   fun setContentPath(view: View, contentPath: String) {
     (view as VgsAttrInstance).vgsText.setContentPath(contentPath);

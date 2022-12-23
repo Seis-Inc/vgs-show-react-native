@@ -40,6 +40,7 @@ export type VgsShowReactNativeProps = {
     pattern: string;
     template: string;
   };
+  allowFontScaling?:boolean;
 };
 
 const NATIVE_COMP_IDENTIFIER = 'VgsShowReactNativeView';
