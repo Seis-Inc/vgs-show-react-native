@@ -55,7 +55,9 @@ class VgsAttrInstance(context: ReactContext) : LinearLayout(context) {
     var request = VGSRequest.Builder(path, methodVal);
 
     if (payload != null && methodVal != VGSHttpMethod.GET) {
-      request = request.body(payload.toHashMap())
+      val rawMap = payload.toHashMap()
+      val bodyMap = deepNonNullMap(rawMap as Map<String, Any?>)
+      request = request.body(bodyMap)
     }
 
     val self = this;
@@ -92,6 +94,26 @@ class VgsAttrInstance(context: ReactContext) : LinearLayout(context) {
       })
 
     this.vgsShow.requestAsync(request.build());
+  }
+
+  private fun deepNonNullMap(input: Map<String, Any?>): Map<String, Any> {
+    val result = HashMap<String, Any>()
+    for ((key, value) in input) {
+      val converted = convertValue(value)
+      if (converted != null) {
+        result[key] = converted
+      }
+    }
+    return result
+  }
+
+  private fun convertValue(value: Any?): Any? {
+    return when (value) {
+      null -> null
+      is Map<*, *> -> deepNonNullMap(value as Map<String, Any?>)
+      is List<*> -> value.mapNotNull { convertValue(it) }
+      else -> value
+    }
   }
 
   fun copyToClipboard() {
